@@ -6,7 +6,7 @@
 #    By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 23:38:54 by sielee            #+#    #+#              #
-#    Updated: 2022/07/29 00:23:34 by sielee           ###   ########seoul.kr   #
+#    Updated: 2022/08/22 22:45:28 by sielee           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,10 @@ INC_DIR = inc
 SRCS_DIR = srcs
 
 SRCS = $(addsuffix .c,$(addprefix $(SRCS_DIR)/,\
+		ft_atoi\
+		ft_malloc\
+		ft_error\
+		ft_routine\
 		main))
 
 OBJS = $(SRCS:.c=.o)
