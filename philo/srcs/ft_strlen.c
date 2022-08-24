@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/22 17:27:19 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/24 15:25:48 by sielee           ###   ########seoul.kr  */
+/*   Created: 2022/08/24 17:59:49 by sielee            #+#    #+#             */
+/*   Updated: 2022/08/24 18:00:02 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*ft_malloc(size_t size)
+size_t	ft_strlen(const char *s)
 {
-	void	*res;
+	size_t	i;
 
-	res = malloc(size);
-	if (!res)
-		ft_print_error("malloc failed");
-	return (res);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_print_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,30 +12,21 @@
 
 #include "philo.h"
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
 void	ft_putendl_fd(char *s, int fd)
 {
 	write(fd, s, ft_strlen(s));
 	write(fd, &"\n", 1);
 }
 
-void	ft_error(char *str)
+int	ft_print_error(char *str)
 {
 	ft_putendl_fd(str, STDERR_FILENO);
+	return (EXIT_FAILURE);
 }
 
 int	ft_end_with_free(t_philo *philo, char *err_msg)
 {
-	ft_error(err_msg);
+	ft_print_error(err_msg);
 	ft_free_philo(philo);
 	return (EXIT_FAILURE);
 }
