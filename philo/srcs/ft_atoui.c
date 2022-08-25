@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atonum.c                                        :+:      :+:    :+:   */
+/*   ft_atoui.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 17:14:45 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/24 19:47:53 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/25 12:38:00 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_bool	ft_is_space(char c)
 }
 
 // 0 ~ 42 94 96 72 95
-static t_bool	ft_check_usint_range_deeply(char *s)
+static t_bool	ft_check_unsigned_int_range(char *s)
 {
 	if ((s[0] <= '4' && s[0] >= '0') && (s[1] <= '2' && s[1] >= '0') \
 	&& (s[2] <= '9' && s[2] >= '0') && (s[3] <= '4' && s[3] >= '0') \
@@ -35,7 +35,7 @@ static t_bool	ft_check_usint_range_deeply(char *s)
 
 static t_bool	ft_check_num_range(char *s)
 {
-	while (s)
+	while (*s)
 	{
 		if (!(*s >= '0' && *s <= '9'))
 			return (FALSE);
@@ -60,10 +60,10 @@ t_bool	ft_if_valid_args_range(char *av[])
 			av[i]++;
 		while (*av[i] == '0')
 			av[i]++;
-		if (av[i])
+		if (!*av[i])
 			return (FALSE);
 		len = ft_strlen(av[i]);
-		if (len > 9 || len == 9 && !ft_check_if_usint_range_deeply(av[i]))
+		if (len > 9 || (len == 9 && !ft_check_unsigned_int_range(av[i])))
 			return (FALSE);
 		else if (!ft_check_num_range(av[i]))
 			return (FALSE);
@@ -79,7 +79,7 @@ unsigned int	ft_atoui(const char *str)
 	
 	while (ft_is_space(*str))
 		str++;
-	if (str == '+')
+	if (*str == '+')
 		str++;
 	while (*str >= '0' && *str <= '9')
 	{

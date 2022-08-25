@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 23:35:48 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/24 20:26:36 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/25 16:14:58 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ void			ft_free_philo(t_philo *philo);
 int				ft_print_error(char *str);
 int				ft_end_with_free(t_philo *philo, char *err_msg);
 
+void			*ft_philo_routine(void *arg);
+
+void			ft_print_state(t_philo *philo, t_state state);
+
+int				ft_init_round(t_round *round, t_info *info, char *av[]);
+
 enum e_state
 {
 	FORK,
@@ -67,20 +73,22 @@ struct s_info
 
 struct s_philo
 {
-	t_info		*info;
-	t_mutex		mut_eat;
-	t_pthread	tid;
-	t_bool		fork;
-	t_bool		*l_fork;
-	t_bool		*r_fork;
-	int			id;
-	int			meal_cnt;
+	t_info			*info;
+	t_pthread		tid;
+	t_mutex			monitor;
+	t_mutex			fork;
+	t_mutex			*l_fork;
+	t_mutex			*r_fork;
+	t_mutex			*share;
+	unsigned int	id;
+	unsigned int	meal_cnt;
 };
 
 struct s_round
 {
 	t_philo	*philo;
 	t_info	*info;
+	t_mutex	share;
 };
 
 #endif
