@@ -6,7 +6,7 @@
 #    By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 23:38:54 by sielee            #+#    #+#              #
-#    Updated: 2022/08/26 23:13:42 by sielee           ###   ########seoul.kr   #
+#    Updated: 2022/08/28 01:48:15 by sielee           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS = $(addsuffix .c,\
 		init\
 		routine\
 		monitoring\
+		simulate\
 		time\
 		print_state\
 		main)

@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:33:21 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/27 17:18:37 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 02:13:35 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ static t_bool	ft_check_all_done(t_philo *philo)
 		pthread_mutex_unlock(&philo[i].monitor);
 		i++;
 	}
+	if (!philo->share->is_over)
+		ft_print_done(philo);
 	pthread_mutex_lock(&philo->share->m_over);
-	ft_print_finish(philo);
 	philo->share->is_over = TRUE;
 	pthread_mutex_unlock(&philo->share->m_over);
 	return (TRUE);
@@ -44,14 +45,15 @@ static t_bool	ft_check_dead(t_philo *philo)
 
 	info = &philo->share->info;
 	starving = 0;
-	if (philo->meal_cnt == 0)
-		return (FALSE);
 	starving = ft_get_time_stamp(philo->last_meal);
+	if (philo->meal_cnt == 0)
+		starving = ft_get_time_stamp(philo->share->start_time);
 	if (starving < info->time_die)
 		return (FALSE);
 	else
 	{
-		ft_print_state(philo, DIE);
+		if (!philo->share->is_over)
+			ft_print_die(philo);
 		pthread_mutex_lock(&philo->share->m_over);
 		philo->share->is_over = TRUE;
 		pthread_mutex_unlock(&philo->share->m_over);
@@ -66,11 +68,11 @@ void	ft_monitoring(t_share *share)
 	t_bool			is_all_done;
 	unsigned int	i;
 
+	is_dead = FALSE;
 	is_all_done = FALSE;
 	while (TRUE)
 	{
 		i = 0;
-		is_dead = FALSE;
 		while ((i < share->info.num_philo) && (!is_dead))
 		{
 			pthread_mutex_lock(&share->philo[i].monitor);

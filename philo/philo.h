@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 23:35:48 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/27 17:15:22 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 01:40:09 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+# define COL_RED "\x1b[31m" 
+# define COL_GREEN "\x1b[32m"
+# define COL_ORIGIN "\x1b[0m"
 
 typedef struct s_info	t_info;
 typedef struct s_philo	t_philo;
@@ -39,13 +43,15 @@ void			ft_free(void **ptr);
 void			ft_free_philo(t_philo *philo);
 
 /* SIMULATION */
+int				ft_simulate(t_share *share);
 int				ft_init_share(t_share *round, char *av[]);
 void			*ft_philo_routine(void *arg);
 void			ft_monitoring(t_share *share);
 
 /* PRINT */
 void			ft_print_state(t_philo *philo, t_state state);
-void			ft_print_finish(t_philo *philo);
+void			ft_print_done(t_philo *philo);
+void			ft_print_die(t_philo *philo);
 
 /* TIME */
 long long		ft_get_time_in_ms(void);
@@ -57,14 +63,14 @@ enum e_state
 	EAT,
 	SLEEP,
 	THINK,
-	DIE,
-	FULL
 };
 
 enum e_bool
 {
 	FALSE = 0,
-	TRUE = 1
+	TRUE = 1,
+	OFF = 0,
+	ON = 1
 };
 
 struct s_info
@@ -81,8 +87,10 @@ struct s_philo
 	t_pthread		tid;
 	t_mutex			monitor;
 	t_mutex			fork;
-	t_mutex			*l_fork;
 	t_mutex			*r_fork;
+	t_mutex			*l_fork;
+	t_bool			has_r_fork;
+	t_bool			has_l_fork;
 	t_share			*share;
 	unsigned int	id;
 	unsigned int	meal_cnt;
