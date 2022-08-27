@@ -1,0 +1,86 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitoring.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/26 20:33:21 by sielee            #+#    #+#             */
+/*   Updated: 2022/08/27 17:18:37 by sielee           ###   ########seoul.kr  */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
+
+static t_bool	ft_check_all_done(t_philo *philo)
+{
+	t_info			*info;
+	unsigned int	i;
+
+	info = &philo->share->info;
+	i = 0;
+	while (i < info->num_philo)
+	{
+		pthread_mutex_lock(&philo[i].monitor);
+		if (philo[i].meal_cnt < info->num_must_eat)
+		{
+			pthread_mutex_unlock(&philo[i].monitor);
+			return (FALSE);
+		}
+		pthread_mutex_unlock(&philo[i].monitor);
+		i++;
+	}
+	pthread_mutex_lock(&philo->share->m_over);
+	ft_print_finish(philo);
+	philo->share->is_over = TRUE;
+	pthread_mutex_unlock(&philo->share->m_over);
+	return (TRUE);
+}
+
+static t_bool	ft_check_dead(t_philo *philo)
+{
+	t_info			*info;
+	long long		starving;
+
+	info = &philo->share->info;
+	starving = 0;
+	if (philo->meal_cnt == 0)
+		return (FALSE);
+	starving = ft_get_time_stamp(philo->last_meal);
+	if (starving < info->time_die)
+		return (FALSE);
+	else
+	{
+		ft_print_state(philo, DIE);
+		pthread_mutex_lock(&philo->share->m_over);
+		philo->share->is_over = TRUE;
+		pthread_mutex_unlock(&philo->share->m_over);
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+void	ft_monitoring(t_share *share)
+{
+	t_bool			is_dead;
+	t_bool			is_all_done;
+	unsigned int	i;
+
+	is_all_done = FALSE;
+	while (TRUE)
+	{
+		i = 0;
+		is_dead = FALSE;
+		while ((i < share->info.num_philo) && (!is_dead))
+		{
+			pthread_mutex_lock(&share->philo[i].monitor);
+			is_dead = ft_check_dead(&share->philo[i]);
+			pthread_mutex_unlock(&share->philo[i].monitor);
+			i++;
+		}
+		if (share->info.num_must_eat)
+			is_all_done = ft_check_all_done(share->philo);
+		if (is_dead || is_all_done)
+			break ;
+	}
+}

@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_state.c                                      :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 13:28:19 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/25 16:03:43 by sielee           ###   ########seoul.kr  */
+/*   Created: 2022/08/27 17:16:41 by sielee            #+#    #+#             */
+/*   Updated: 2022/08/27 17:16:44 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_print_state(t_philo *philo, t_state state)
+void	ft_putendl_fd(char *s, int fd)
 {
-	t_timeval	timeval;
+	write(fd, s, ft_strlen(s));
+	write(fd, &"\n", 1);
+}
 
-	gettimeofday(&timeval, NULL);//
-	printf("%u %d", (timeval.tv_usec / 1000), philo->id);
-	if (state == FORK)
-		printf(" has taken a fork\n");
-	else if (state == EAT)
-		printf(" is eating\n");
-	else if (state == SLEEP)
-		printf(" is sleeping\n");
-	else if (state == THINK)
-		printf(" is thinking\n");
-	else if (state == DIE)
-		printf(" died\n");
+int	ft_print_error(char *str)
+{
+	ft_putendl_fd(str, STDERR_FILENO);
+	return (EXIT_FAILURE);
+}
+
+int	ft_end_with_free(t_philo *philo, char *err_msg)
+{
+	ft_print_error(err_msg);
+	ft_free_philo(philo);
+	return (EXIT_FAILURE);
 }

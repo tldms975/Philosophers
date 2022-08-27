@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 17:14:45 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/25 12:38:00 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 17:17:28 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static t_bool	ft_is_space(char c)
 	return (FALSE);
 }
 
-// 0 ~ 42 94 96 72 95
 static t_bool	ft_check_unsigned_int_range(char *s)
 {
 	if ((s[0] <= '4' && s[0] >= '0') && (s[1] <= '2' && s[1] >= '0') \
@@ -75,8 +74,8 @@ t_bool	ft_if_valid_args_range(char *av[])
 unsigned int	ft_atoui(const char *str)
 {
 	unsigned int	res;
+
 	res = 0;
-	
 	while (ft_is_space(*str))
 		str++;
 	if (*str == '+')

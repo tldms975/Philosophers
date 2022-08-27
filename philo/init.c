@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:57 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/25 16:26:13 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 17:16:19 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	ft_init_philo(t_round *round, t_philo *philo, t_info *info)
+static void	ft_init_philo(t_philo *philo, t_share *share)
 {
 	int	i;
 	int	all;
 
 	i = 0;
-	all = info->num_philo;
+	all = share->info.num_philo;
 	while (i < all)
 	{
-		philo[i].id = i;
-		philo[i].info = info;
-		philo[i].share = &round->share;
+		philo[i].id = i + 1;
+		philo[i].share = share;
+		philo[i].meal_cnt = 0;
 		pthread_mutex_init(&philo[i].monitor, NULL);
 		pthread_mutex_init(&philo[i].fork, NULL);
 		philo[i].r_fork = &philo[i].fork;
@@ -50,18 +50,20 @@ static int	ft_init_info(t_info *info, char *av[])
 	return (EXIT_SUCCESS);
 }
 
-int	ft_init_round(t_round *round, t_info *info, char *av[])
+int	ft_init_share(t_share *share, char *av[])
 {
 	t_philo	*philo;
 
-	if (ft_init_info(info, av) == EXIT_FAILURE)
+	if (ft_init_info(&share->info, av) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	philo = ft_malloc(sizeof(t_info) * (info->num_philo));
+	philo = ft_malloc(sizeof(t_philo) * (share->info.num_philo));
 	if (!philo)
 		return (EXIT_FAILURE);
-	round->info = info;
-	round->philo = philo;
-	pthread_mutex_init(&round->share, NULL);
-	ft_init_philo(round, philo, info);
+	share->philo = philo;
+	share->is_over = FALSE;
+	pthread_mutex_init(&share->all_ready, NULL);
+	pthread_mutex_init(&share->m_print, NULL);
+	pthread_mutex_init(&share->m_over, NULL);
+	ft_init_philo(philo, share);
 	return (EXIT_SUCCESS);
 }
