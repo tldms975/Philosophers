@@ -6,13 +6,13 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:33:21 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/28 14:49:12 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 15:22:05 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static t_bool	ft_check_all_done(t_philo *philo)
+static t_sign	ft_check_all_done(t_philo *philo)
 {
 	t_info			*info;
 	unsigned int	i;
@@ -35,7 +35,7 @@ static t_bool	ft_check_all_done(t_philo *philo)
 	return (TRUE);
 }
 
-static t_bool	ft_check_dead(t_philo *philo)
+static t_sign	ft_check_dead(t_philo *philo)
 {
 	t_info			*info;
 	long long		starving;
@@ -58,8 +58,8 @@ static t_bool	ft_check_dead(t_philo *philo)
 
 void	ft_monitoring(t_share *share)
 {
-	t_bool			is_dead;
-	t_bool			is_all_done;
+	t_sign			is_dead;
+	t_sign			is_all_done;
 	unsigned int	i;
 
 	is_dead = FALSE;

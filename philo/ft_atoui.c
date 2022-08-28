@@ -6,13 +6,13 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 17:14:45 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/27 17:17:28 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 15:22:05 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static t_bool	ft_is_space(char c)
+static t_sign	ft_is_space(char c)
 {
 	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r' || \
 	c == ' ')
@@ -20,7 +20,7 @@ static t_bool	ft_is_space(char c)
 	return (FALSE);
 }
 
-static t_bool	ft_check_unsigned_int_range(char *s)
+static t_sign	ft_check_unsigned_int_range(char *s)
 {
 	if ((s[0] <= '4' && s[0] >= '0') && (s[1] <= '2' && s[1] >= '0') \
 	&& (s[2] <= '9' && s[2] >= '0') && (s[3] <= '4' && s[3] >= '0') \
@@ -32,7 +32,7 @@ static t_bool	ft_check_unsigned_int_range(char *s)
 		return (FALSE);
 }
 
-static t_bool	ft_check_num_range(char *s)
+static t_sign	ft_check_num_range(char *s)
 {
 	while (*s)
 	{
@@ -43,7 +43,7 @@ static t_bool	ft_check_num_range(char *s)
 	return (TRUE);
 }
 
-t_bool	ft_if_valid_args_range(char *av[])
+t_sign	ft_if_valid_args_range(char *av[])
 {
 	int	i;
 	int	len;

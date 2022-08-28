@@ -6,7 +6,7 @@
 #    By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 23:38:54 by sielee            #+#    #+#              #
-#    Updated: 2022/08/28 01:48:15 by sielee           ###   ########seoul.kr   #
+#    Updated: 2022/08/28 14:57:47 by sielee           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS = $(addsuffix .c,\
 		ft_free\
 		init\
 		routine\
+		routine_fork\
 		monitoring\
 		simulate\
 		time\
