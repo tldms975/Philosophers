@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:28:19 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/28 02:16:26 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 13:58:26 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,6 @@ void	ft_print_done(t_philo *philo)
 
 void	ft_print_die(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->share->m_over);
-	if (philo->share->is_over)
-	{
-		pthread_mutex_unlock(&philo->share->m_over);
-		return ;
-	}
-	pthread_mutex_unlock(&philo->share->m_over);
 	pthread_mutex_lock(&philo->share->m_print);
 	printf(COL_RED "%lld ms\t%d died\n" COL_ORIGIN, \
 	ft_get_time_stamp(philo->share->start_time), philo->id);

@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:33:21 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/28 02:13:35 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 13:58:06 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static t_bool	ft_check_all_done(t_philo *philo)
 		pthread_mutex_unlock(&philo[i].monitor);
 		i++;
 	}
+	pthread_mutex_lock(&philo->share->m_over);
 	if (!philo->share->is_over)
 		ft_print_done(philo);
-	pthread_mutex_lock(&philo->share->m_over);
 	philo->share->is_over = TRUE;
 	pthread_mutex_unlock(&philo->share->m_over);
 	return (TRUE);
@@ -52,9 +52,9 @@ static t_bool	ft_check_dead(t_philo *philo)
 		return (FALSE);
 	else
 	{
+		pthread_mutex_lock(&philo->share->m_over);
 		if (!philo->share->is_over)
 			ft_print_die(philo);
-		pthread_mutex_lock(&philo->share->m_over);
 		philo->share->is_over = TRUE;
 		pthread_mutex_unlock(&philo->share->m_over);
 		return (TRUE);
