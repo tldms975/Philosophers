@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:46:39 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/28 15:48:37 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 17:59:49 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_simulate(t_share *share)
 	share->is_ready = TRUE;
 	pthread_mutex_unlock(&share->m_ready);
 	ft_monitoring(share);
-	ft_wait_all(share->philo, i - 1);
-	ft_stop_simulating(share, i - 1);
+	ft_wait_all(share->philo, i);
+	ft_stop_simulating(share, i);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 23:35:48 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/28 15:38:27 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 16:24:12 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <pthread.h>
 # include <sys/time.h>
+# include <pthread.h>
 
 # define COL_RED "\x1b[31m" 
 # define COL_GREEN "\x1b[32m"
