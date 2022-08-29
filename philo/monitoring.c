@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:33:21 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/29 00:04:38 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 01:24:22 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static t_sign	ft_check_dead(t_philo *philo)
 	long long		starving;
 
 	info = &philo->share->info;
-	starving = 0;
 	starving = ft_get_time_stamp(philo->last_meal);
 	if (philo->meal_cnt == 0)
 		starving = ft_get_time_stamp(philo->share->start_time);
