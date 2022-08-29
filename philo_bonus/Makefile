@@ -6,7 +6,7 @@
 #    By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 23:38:54 by sielee            #+#    #+#              #
-#    Updated: 2022/07/29 00:23:28 by sielee           ###   ########seoul.kr   #
+#    Updated: 2022/08/29 16:07:52 by sielee           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,21 +15,30 @@ FLAGS = -Wall -Wextra -Werror
 
 NAME = philo_bonus
 
-INC_DIR = inc
-SRCS_DIR = philo/srcs
-
-SRCS = $(addsuffix _bonus.c,$(addprefix $(B_SRCS_DIR)/,\
-		main))
+SRCS = $(addsuffix _bonus.c,\
+		ft_atoui\
+		ft_strlen\
+		ft_malloc\
+		ft_error\
+		ft_free\
+		init\
+		routine\
+		monitoring\
+		simulate\
+		time\
+		print_state\
+		terminate\
+		main)
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 %.o : %.c
-	@$(CC) $(FLAGS) -I $(INC_DIR) -c $^ -o $@
+	@$(CC) $(FLAGS) -c $^ -o $@
 
 $(NAME): $(OBJS)
-	@$(CC) $(FLAGS) -I $(INC_DIR) -o $@ $^
+	@$(CC) $(FLAGS) -o $@ $^
 
 clean:
 	@rm -f $(OBJS)
