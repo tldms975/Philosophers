@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 14:56:52 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/28 15:48:24 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 13:35:29 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	ft_take_left_fork(t_philo *a_philo)
 
 static void	ft_choose_forks(t_philo *a_philo)
 {
-	if (!(a_philo->id % 2))
+	if (a_philo->id % 2)
 	{
 		ft_take_right_fork(a_philo);
 		ft_take_left_fork(a_philo);
