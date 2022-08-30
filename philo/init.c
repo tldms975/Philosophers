@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:57 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 21:28:34 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 00:22:30 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	ft_init_share(t_share *share, char *av[])
 	pthread_mutex_init(&share->m_ready, NULL);
 	pthread_mutex_init(&share->m_print, NULL);
 	pthread_mutex_init(&share->m_over, NULL);
-	pthread_mutex_init(&share->m_check_end, NULL);
 	ft_init_philo(philo, share);
 	return (EXIT_SUCCESS);
 }
