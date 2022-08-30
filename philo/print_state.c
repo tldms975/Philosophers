@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:28:19 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 14:17:33 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 19:05:02 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_print_done(t_philo *philo)
 
 void	ft_print_die(t_philo *philo)
 {
+	pthread_mutex_unlock(&philo->share->m_over);
 	pthread_mutex_lock(&philo->share->m_print);
 	pthread_mutex_lock(&philo->share->m_over);
 	if (philo->share->is_over)
@@ -39,9 +40,9 @@ void	ft_print_die(t_philo *philo)
 		return ;
 	}
 	philo->share->is_over = TRUE;
-	pthread_mutex_unlock(&philo->share->m_over);
-	printf(COL_RED "%lld ms\t%d died\n" COL_ORIGIN, \
+	printf(COL_RED "%lld\t%d died\n" COL_ORIGIN, \
 	ft_get_time_stamp(philo->share->start_time), philo->id);
+	pthread_mutex_unlock(&philo->share->m_over);
 	pthread_mutex_unlock(&philo->share->m_print);
 }
 
@@ -58,7 +59,7 @@ void	ft_print_state(t_philo *philo, t_state state)
 		return ;
 	}
 	pthread_mutex_unlock(&philo->share->m_over);
-	printf("%lld ms\t%d ", ft_get_time_stamp(philo->share->start_time), \
+	printf("%lld\t%d ", ft_get_time_stamp(philo->share->start_time), \
 	philo->id);
 	if (state == FORK)
 		printf("has taken a fork\n");

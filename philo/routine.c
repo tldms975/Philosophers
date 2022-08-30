@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 22:45:11 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 15:46:27 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 17:54:25 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static void	ft_sleep_and_think(t_philo *a_philo)
 	}
 	pthread_mutex_unlock(&a_philo->share->m_over);
 	ft_print_state(a_philo, THINK);
+	if (a_philo->share->info.num_philo % 2)
+		usleep(100);
 }
 
 void	*ft_philo_routine(void *arg)
@@ -60,7 +62,7 @@ void	*ft_philo_routine(void *arg)
 	if (a_philo->share->is_ready == ERR)
 		return (NULL);
 	if (!(a_philo->id % 2))
-		ft_usleep(a_philo->share->info.num_must_eat);
+		ft_usleep(a_philo->share->info.time_eat);
 	while (TRUE)
 	{
 		ft_take_forks(a_philo);

@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:33:21 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/29 01:24:22 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 19:05:02 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ static t_sign	ft_check_all_done(t_philo *philo)
 		i++;
 	}
 	if (!philo->share->is_over)
+	{
 		ft_print_done(philo);
-	return (TRUE);
+		return (TRUE);
+	}
+	return (FALSE);
 }
 
 static t_sign	ft_check_dead(t_philo *philo)
@@ -41,15 +44,15 @@ static t_sign	ft_check_dead(t_philo *philo)
 	long long		starving;
 
 	info = &philo->share->info;
-	starving = ft_get_time_stamp(philo->last_meal);
-	if (philo->meal_cnt == 0)
+	if (philo->meal_cnt != 0)
+		starving = ft_get_time_stamp(philo->last_meal);
+	else
 		starving = ft_get_time_stamp(philo->share->start_time);
 	if (starving < info->time_die)
 		return (FALSE);
-	else
+	else if (!philo->share->is_over)
 	{
-		if (!philo->share->is_over)
-			ft_print_die(philo);
+		ft_print_die(philo);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -69,7 +72,10 @@ void	ft_monitoring(t_share *share)
 		while ((i < share->info.num_philo) && (!is_dead))
 		{
 			pthread_mutex_lock(&share->philo[i].monitor);
+			pthread_mutex_lock(&share->m_over);
 			is_dead = ft_check_dead(&share->philo[i]);
+			if (!is_dead)
+				pthread_mutex_unlock(&share->m_over);
 			pthread_mutex_unlock(&share->philo[i].monitor);
 			i++;
 		}
