@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:46:39 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 21:27:38 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 23:44:02 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	ft_simulate(t_share *share)
 		i++;
 	}
 	share->start_time = ft_get_time_in_ms();
-	share->is_ready = TRUE;
 	pthread_mutex_unlock(&share->m_ready);
 	ft_monitoring(share);
 	ft_wait_all(share->philo, i);

@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:33:21 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 22:04:34 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 00:05:32 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ static t_sign	ft_check_dead(t_philo *philo)
 		return (FALSE);
 	else if (!philo->share->is_over)
 	{
-		printf("timd die: %u\n", info->time_die);
-		printf("starving: %llu\n", starving);
 		ft_print_die(philo);
 		return (TRUE);
 	}
@@ -67,6 +65,7 @@ void	ft_monitoring(t_share *share)
 	unsigned int	i;
 	t_sign			is_dead;
 
+	is_dead = FALSE;
 	while (TRUE)
 	{
 		i = 0;

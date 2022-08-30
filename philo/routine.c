@@ -6,32 +6,34 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 22:45:11 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 22:03:38 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 00:01:30 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	ft_eat(t_philo *a_philo)
+static t_sign	ft_eat(t_philo *a_philo)
 {
 	if (a_philo->has_r_fork && a_philo->has_l_fork)
 	{
 		pthread_mutex_lock(&a_philo->m_eat);
 		ft_print_state(a_philo, EAT);
 		a_philo->last_meal = ft_get_time_in_ms();
-		a_philo->meal_cnt += 1;
 		pthread_mutex_unlock(&a_philo->m_eat);
+		a_philo->meal_cnt += 1;
 		ft_usleep(a_philo->share->info.time_eat);
 		pthread_mutex_unlock(a_philo->r_fork);
 		a_philo->has_r_fork = OFF;
 		pthread_mutex_unlock(a_philo->l_fork);
 		a_philo->has_l_fork = OFF;
+		pthread_mutex_lock(&a_philo->share->m_over);
+		return (TRUE);
 	}
+	return (FALSE);
 }
 
 static void	ft_sleep_and_think(t_philo *a_philo)
 {
-	pthread_mutex_lock(&a_philo->share->m_over);
 	if (a_philo->share->is_over)
 	{
 		pthread_mutex_unlock(&a_philo->share->m_over);
@@ -66,8 +68,8 @@ void	*ft_philo_routine(void *arg)
 	while (TRUE)
 	{
 		ft_take_forks(a_philo);
-		ft_eat(a_philo);
-		ft_sleep_and_think(a_philo);
+		if (ft_eat(a_philo))
+			ft_sleep_and_think(a_philo);
 		pthread_mutex_lock(&a_philo->share->m_over);
 		if (a_philo->share->is_over)
 		{
