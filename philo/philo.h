@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 23:35:48 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/28 16:24:12 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 13:59:13 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void			ft_print_die(t_philo *philo);
 /* TIME */
 long long		ft_get_time_in_ms(void);
 long long		ft_get_time_stamp(long long start_time);
+void			ft_usleep(long long time);
 
 enum e_state
 {

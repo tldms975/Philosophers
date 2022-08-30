@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 23:35:48 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/29 16:12:26 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 15:08:47 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void			ft_print_done(t_philo *philo);
 /* TIME */
 long long		ft_get_time_in_ms(void);
 long long		ft_get_time_stamp(long long start_time);
+void			ft_usleep(long long time);
 
 /* TERMINATE */
 int				ft_stop_by_error(t_share *share, char *err_msg);
@@ -95,7 +96,6 @@ struct s_philo
 	pthread_t		tid;
 	sem_t			*sm_eat;
 	t_share			*share;
-	t_sign			is_done;
 	unsigned int	meal_cnt;
 	long long		last_meal;
 };

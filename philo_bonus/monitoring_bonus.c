@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:33:21 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/29 16:16:16 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 15:58:45 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	*ft_over_if_dead(void *arg)
 		sem_wait(a_philo->sm_eat);
 		a_philo->share->is_dead = ft_check_dead(a_philo);
 		sem_post(a_philo->sm_eat);
+		usleep(500);
 	}
 	return (NULL);
 }

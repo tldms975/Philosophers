@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 14:56:52 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 13:35:29 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 14:04:23 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,17 @@ static void	ft_take_left_fork(t_philo *a_philo)
 		return ;
 	}
 	pthread_mutex_unlock(&a_philo->share->m_over);
-	if (a_philo->r_fork != a_philo->l_fork)
-		pthread_mutex_lock(a_philo->l_fork);
+	if ((a_philo->share->info.num_philo == 1) && (a_philo->id == 1))
+	{
+		pthread_mutex_unlock(a_philo->r_fork);
+		ft_usleep(a_philo->share->info.time_die);
+	}
 	else
-		usleep(a_philo->share->info.time_eat * 1e3);
-	a_philo->has_l_fork = ON;
-	ft_print_state(a_philo, FORK);
+	{
+		pthread_mutex_lock(a_philo->l_fork);
+		a_philo->has_l_fork = ON;
+		ft_print_state(a_philo, FORK);
+	}
 }
 
 static void	ft_choose_forks(t_philo *a_philo)

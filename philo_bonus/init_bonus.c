@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:57 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/29 15:41:36 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 15:08:40 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ static void	ft_init_philo(t_philo *philo, t_share *share)
 		philo[i].id = i + 1;
 		philo[i].share = share;
 		philo[i].meal_cnt = 0;
-		philo[i].is_done = FALSE;
 		sem_unlink("sm_eat");
 		philo[i].sm_eat = sem_open("sm_eat", O_CREAT, 0644, 1);
 		i++;
 	}
+	if (philo->share->info.num_philo == 1)
+		sem_post(philo[0].share->sm_set_eat);
 }
 
 static int	ft_init_info(t_info *info, char *av[])

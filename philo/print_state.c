@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:28:19 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/28 14:50:20 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 14:17:33 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	ft_print_state(t_philo *philo, t_state state)
 	{
 		pthread_mutex_unlock(&philo->share->m_over);
 		pthread_mutex_unlock(&philo->share->m_print);
+		if (state == EAT)
+			pthread_mutex_unlock(&philo->monitor);
 		return ;
 	}
 	pthread_mutex_unlock(&philo->share->m_over);
