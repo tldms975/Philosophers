@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 19:46:39 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/28 17:59:49 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 21:27:38 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_stop_simulating(t_share *share, unsigned int idx_end)
 	while (i < idx_end)
 	{
 		pthread_mutex_destroy(&philo[i].fork);
-		pthread_mutex_destroy(&philo[i].monitor);
+		pthread_mutex_destroy(&philo[i].m_eat);
 		i++;
 	}
 	pthread_mutex_destroy(&share->m_ready);

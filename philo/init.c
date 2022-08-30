@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:57 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 13:54:11 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 21:28:34 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_init_philo(t_philo *philo, t_share *share)
 		philo[i].meal_cnt = 0;
 		philo[i].has_r_fork = OFF;
 		philo[i].has_l_fork = OFF;
-		pthread_mutex_init(&philo[i].monitor, NULL);
+		pthread_mutex_init(&philo[i].m_eat, NULL);
 		pthread_mutex_init(&philo[i].fork, NULL);
 		philo[i].r_fork = &philo[i].fork;
 		if (i == 0)
@@ -67,6 +67,7 @@ int	ft_init_share(t_share *share, char *av[])
 	pthread_mutex_init(&share->m_ready, NULL);
 	pthread_mutex_init(&share->m_print, NULL);
 	pthread_mutex_init(&share->m_over, NULL);
+	pthread_mutex_init(&share->m_check_end, NULL);
 	ft_init_philo(philo, share);
 	return (EXIT_SUCCESS);
 }

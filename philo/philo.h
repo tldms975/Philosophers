@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 23:35:48 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 13:59:13 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 21:28:05 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ struct s_info
 struct s_philo
 {
 	t_pthread		tid;
-	t_mutex			monitor;
+	t_mutex			m_eat;
 	t_mutex			fork;
 	t_mutex			*r_fork;
 	t_mutex			*l_fork;
@@ -105,6 +105,7 @@ struct s_share
 	t_mutex			m_ready;
 	t_mutex			m_print;
 	t_mutex			m_over;
+	t_mutex			m_check_end;
 	long long		start_time;
 	t_sign			is_over;
 	t_sign			is_ready;
