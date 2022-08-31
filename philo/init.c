@@ -6,13 +6,13 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:57 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/31 22:45:44 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 22:54:48 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	ft_set_fork_direction(t_philo *philo, int i, int all)
+static void	ft_set_fork_position(t_philo *philo, int i, int all)
 {
 	philo[i].r_fork = &philo[i].fork;
 	philo[i].stat_r_fork = &philo[i].stat_fork;
@@ -43,7 +43,7 @@ static void	ft_init_philo(t_philo *philo, t_share *share)
 		philo[i].stat_fork = OFF;
 		pthread_mutex_init(&philo[i].m_eat, NULL);
 		pthread_mutex_init(&philo[i].fork, NULL);
-		ft_set_fork_direction(philo, i, all);
+		ft_set_fork_position(philo, i, all);
 		i++;
 	}
 }
