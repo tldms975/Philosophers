@@ -6,11 +6,27 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:57 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/31 00:22:30 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 22:45:44 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	ft_set_fork_direction(t_philo *philo, int i, int all)
+{
+	philo[i].r_fork = &philo[i].fork;
+	philo[i].stat_r_fork = &philo[i].stat_fork;
+	if (i == 0)
+	{
+		philo[i].l_fork = &philo[all - 1].fork;
+		philo[i].stat_l_fork = &philo[all - 1].stat_fork;
+	}
+	else
+	{
+		philo[i].stat_l_fork = &philo[i - 1].stat_fork;
+		philo[i].l_fork = &philo[i - 1].fork;
+	}
+}
 
 static void	ft_init_philo(t_philo *philo, t_share *share)
 {
@@ -24,15 +40,10 @@ static void	ft_init_philo(t_philo *philo, t_share *share)
 		philo[i].id = i + 1;
 		philo[i].share = share;
 		philo[i].meal_cnt = 0;
-		philo[i].has_r_fork = OFF;
-		philo[i].has_l_fork = OFF;
+		philo[i].stat_fork = OFF;
 		pthread_mutex_init(&philo[i].m_eat, NULL);
 		pthread_mutex_init(&philo[i].fork, NULL);
-		philo[i].r_fork = &philo[i].fork;
-		if (i == 0)
-			philo[i].l_fork = &philo[all - 1].fork;
-		else
-			philo[i].l_fork = &philo[i - 1].fork;
+		ft_set_fork_direction(philo, i, all);
 		i++;
 	}
 }

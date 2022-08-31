@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 22:45:11 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/31 17:56:34 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 22:38:40 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_sign	ft_eat(t_philo *a_philo)
 {
-	if (a_philo->has_r_fork && a_philo->has_l_fork)
+	if (*a_philo->stat_r_fork && *a_philo->stat_l_fork)
 	{
 		pthread_mutex_lock(&a_philo->m_eat);
 		ft_print_state(a_philo, EAT);
@@ -22,10 +22,12 @@ static t_sign	ft_eat(t_philo *a_philo)
 		a_philo->meal_cnt += 1;
 		pthread_mutex_unlock(&a_philo->m_eat);
 		ft_usleep(a_philo->share->info.time_eat);
+		pthread_mutex_lock(a_philo->r_fork);
+		*a_philo->stat_r_fork = OFF;
 		pthread_mutex_unlock(a_philo->r_fork);
-		a_philo->has_r_fork = OFF;
+		pthread_mutex_lock(a_philo->l_fork);
+		*a_philo->stat_l_fork = OFF;
 		pthread_mutex_unlock(a_philo->l_fork);
-		a_philo->has_l_fork = OFF;
 		pthread_mutex_lock(&a_philo->share->m_over);
 		return (TRUE);
 	}
