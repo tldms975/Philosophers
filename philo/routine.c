@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 22:45:11 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/31 00:01:30 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 17:56:34 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static t_sign	ft_eat(t_philo *a_philo)
 		pthread_mutex_lock(&a_philo->m_eat);
 		ft_print_state(a_philo, EAT);
 		a_philo->last_meal = ft_get_time_in_ms();
-		pthread_mutex_unlock(&a_philo->m_eat);
 		a_philo->meal_cnt += 1;
+		pthread_mutex_unlock(&a_philo->m_eat);
 		ft_usleep(a_philo->share->info.time_eat);
 		pthread_mutex_unlock(a_philo->r_fork);
 		a_philo->has_r_fork = OFF;
