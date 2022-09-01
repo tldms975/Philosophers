@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 23:35:48 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 15:08:47 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 16:26:20 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ struct s_share
 	sem_t			*sm_fork;
 	sem_t			*sm_set_eat;
 	sem_t			*sm_done;
-	sem_t			*sm_over_after;
+	sem_t			*sm_dead;
 	t_sign			is_dead;
 	long long		start_time;
 };

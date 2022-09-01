@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 14:56:52 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/31 22:55:42 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 01:16:56 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ static void	ft_take_right_fork(t_philo *a_philo)
 	pthread_mutex_unlock(&a_philo->share->m_over);
 	pthread_mutex_lock(a_philo->r_fork);
 	if (*a_philo->stat_r_fork == OFF)
+	{
 		*a_philo->stat_r_fork = ON;
-	ft_print_state(a_philo, FORK);
+		a_philo->has_r_fork = ON;
+		ft_print_state(a_philo, FORK);
+	}
 	pthread_mutex_unlock(a_philo->r_fork);
 }
 
@@ -33,11 +36,6 @@ static void	ft_take_left_fork(t_philo *a_philo)
 	pthread_mutex_lock(&a_philo->share->m_over);
 	if (a_philo->share->is_over)
 	{
-		if (*a_philo->stat_r_fork == ON)
-		{
-			pthread_mutex_unlock(a_philo->r_fork);
-			*a_philo->stat_r_fork = OFF;
-		}
 		pthread_mutex_unlock(&a_philo->share->m_over);
 		return ;
 	}
@@ -51,8 +49,11 @@ static void	ft_take_left_fork(t_philo *a_philo)
 	{
 		pthread_mutex_lock(a_philo->l_fork);
 		if (*a_philo->stat_l_fork == OFF)
+		{
 			*a_philo->stat_l_fork = ON;
-		ft_print_state(a_philo, FORK);
+			a_philo->has_l_fork = ON;
+			ft_print_state(a_philo, FORK);
+		}
 		pthread_mutex_unlock(a_philo->l_fork);
 	}
 }
@@ -77,16 +78,6 @@ void	ft_take_forks(t_philo *a_philo)
 	pthread_mutex_lock(&a_philo->share->m_over);
 	if (a_philo->share->is_over)
 	{
-		if (*a_philo->stat_r_fork == ON)
-		{
-			pthread_mutex_unlock(a_philo->r_fork);
-			*a_philo->stat_r_fork = OFF;
-		}
-		if (*a_philo->stat_l_fork == ON)
-		{
-			pthread_mutex_unlock(a_philo->l_fork);
-			*a_philo->stat_l_fork = OFF;
-		}
 		pthread_mutex_unlock(&a_philo->share->m_over);
 		return ;
 	}

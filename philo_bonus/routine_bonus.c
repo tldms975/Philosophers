@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 22:45:11 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 15:48:39 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 16:25:29 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static void	ft_eat(t_philo *a_philo)
 	sem_wait(a_philo->sm_eat);
 	ft_print_state(a_philo, EAT);
 	a_philo->last_meal = ft_get_time_in_ms();
-	ft_usleep(a_philo->share->info.time_eat);
 	a_philo->meal_cnt += 1;
 	if (a_philo->meal_cnt == a_philo->share->info.num_must_eat)
 		sem_post(a_philo->share->sm_done);
 	sem_post(a_philo->sm_eat);
+	ft_usleep(a_philo->share->info.time_eat);
 	sem_post(a_philo->share->sm_fork);
 	sem_post(a_philo->share->sm_fork);
 	sem_post(a_philo->share->sm_set_eat);
@@ -48,6 +48,7 @@ void	ft_philo_routine(t_philo *a_philo)
 	{
 		ft_eat(a_philo);
 		ft_sleep_and_think(a_philo);
+		usleep(500);
 	}
 	return ;
 }

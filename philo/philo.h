@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 23:35:48 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/31 22:20:18 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 00:42:28 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ struct s_philo
 	t_mutex			fork;
 	t_mutex			*r_fork;
 	t_mutex			*l_fork;
+	t_sign			has_r_fork;
+	t_sign			has_l_fork;
 	t_sign			stat_fork;
 	t_sign			*stat_r_fork;
 	t_sign			*stat_l_fork;

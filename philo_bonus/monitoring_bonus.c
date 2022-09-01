@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:33:21 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 15:58:45 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 16:28:53 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_sign	ft_check_dead(t_philo *philo)
 	if ((starving >= info->time_die) && !(philo->share->is_dead))
 	{
 		ft_print_die(philo);
-		sem_post(philo->share->sm_over_after);
+		sem_post(philo->share->sm_dead);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -66,8 +66,10 @@ static void	*ft_check_done(void *arg)
 		i++;
 	}
 	if (!share->is_dead)
+	{
 		ft_print_done(share->philo);
-	sem_post(share->sm_over_after);
+		sem_post(share->sm_dead);
+	}
 	return (NULL);
 }
 
@@ -76,12 +78,12 @@ void	ft_monitoring_in_parent(t_share *share)
 	pthread_t		tid;
 	unsigned int	i;
 
+	i = 0;
 	if (pthread_create(&tid, NULL, ft_check_done, (void *)share))
 		ft_print_error("pthread_create error");
-	sem_wait(share->sm_over_after);
-	share->is_dead = TRUE;
+	sem_wait(share->sm_dead);
 	ft_term_all_process(share->philo);
-	i = 0;
+	share->is_dead = TRUE;
 	while (i < share->info.num_philo)
 	{
 		sem_post(share->sm_done);

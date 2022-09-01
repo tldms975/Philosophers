@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:06:11 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 14:08:03 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 16:26:20 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	ft_free_share_sem(t_share *share)
 	sem_close(share->sm_print);
 	sem_unlink("sm_set_eat");
 	sem_close(share->sm_set_eat);
-	sem_unlink("sm_over_after");
-	sem_close(share->sm_over_after);
+	sem_unlink("sm_dead");
+	sem_close(share->sm_dead);
 	sem_unlink("sm_done");
 	sem_close(share->sm_done);
 }

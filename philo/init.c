@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:57 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/31 22:54:48 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 00:42:57 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	ft_init_philo(t_philo *philo, t_share *share)
 		philo[i].share = share;
 		philo[i].meal_cnt = 0;
 		philo[i].stat_fork = OFF;
+		philo[i].has_r_fork = OFF;
+		philo[i].has_l_fork = OFF;
 		pthread_mutex_init(&philo[i].m_eat, NULL);
 		pthread_mutex_init(&philo[i].fork, NULL);
 		ft_set_fork_position(philo, i, all);
