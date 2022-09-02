@@ -6,12 +6,12 @@
 #    By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 23:38:54 by sielee            #+#    #+#              #
-#    Updated: 2022/09/01 16:33:53 by sielee           ###   ########seoul.kr   #
+#    Updated: 2022/09/03 02:49:53 by sielee           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=thread
 
 NAME = philo
 
