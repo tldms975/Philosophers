@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:28:19 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/31 00:01:49 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/09/03 15:01:36 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_print_die(t_philo *philo)
 	}
 	philo->share->is_over = TRUE;
 	pthread_mutex_unlock(&philo->share->m_over);
-	printf(COL_RED "%lld\t%d died\n" COL_ORIGIN, \
+	printf(COL_RED "%lldms\t%d died\n" COL_ORIGIN, \
 	ft_get_time_stamp(philo->share->start_time), philo->id);
 	pthread_mutex_unlock(&philo->share->m_print);
 }

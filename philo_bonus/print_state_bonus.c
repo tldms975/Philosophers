@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:28:19 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/30 14:49:04 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/09/03 15:01:50 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_print_die(t_philo *philo)
 void	ft_print_state(t_philo *philo, t_state state)
 {
 	sem_wait(philo->share->sm_print);
-	printf("%lld ms\t%d ", ft_get_time_stamp(philo->share->start_time), \
+	printf("%lldms\t%d ", ft_get_time_stamp(philo->share->start_time), \
 	philo->id);
 	if (state == FORK)
 		printf("has taken a fork\n");
