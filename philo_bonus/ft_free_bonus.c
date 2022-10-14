@@ -6,7 +6,7 @@
 /*   By: sielee <sielee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 22:34:02 by sielee            #+#    #+#             */
-/*   Updated: 2022/08/28 16:09:34 by sielee           ###   ########seoul.kr  */
+/*   Updated: 2022/10/15 01:06:11 by sielee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free(void **ptr)
 {
-	if (*ptr && ptr)
+	if (ptr && *ptr)
 	{
 		free(*ptr);
 		*ptr = NULL;
